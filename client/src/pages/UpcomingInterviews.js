@@ -19,15 +19,15 @@ const UpcomingInterviews = () => {
             <h2 className="text-2xl mb-8 font-bold text-center">
               Upcoming Interviews
             </h2>
-            {data.interviews.map(({ startTime, endTime, _id }) => (
+            {data.interviews.map(({ usersInvited, startTime, endTime, _id }) => (
               <div className="flex flex-col p-4 border-4 rounded-md m-4">
                 <div>Id: {_id} </div>
                 <div>
                   Date: <Moment format="DD-MM-YYYY">{endTime}</Moment>
                 </div>
                 <div>
-                  Participants: 
-                  
+                  Participants:
+                  {usersInvited.map((obj, i)=> { return (<div key={i}> {obj.email} </div>)})}
                 </div>
                 <div className="grid grid-cols-2 mb-2">
                   <div>

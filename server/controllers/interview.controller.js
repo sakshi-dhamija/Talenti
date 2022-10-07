@@ -120,9 +120,10 @@ const addInterview = asyncHandler(async (req, res) => {
 const getUpcomingInterviews = asyncHandler(async (req, res) => {
   console.log(req.body);
   let interviews = await Interview.find({ startTime: { $gte: new Date() } })
+    .populate({ path: "usersInvited", model: "User", select: "email -_id" })
     .lean()
     .exec();
-
+  console.log(interviews[0]?.usersInvited[0]);
   if (Object.keys(interviews).length === 0) interviews = [];
 
   res.status(200).json({
